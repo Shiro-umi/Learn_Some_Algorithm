@@ -27,31 +27,36 @@ eg. 单词"ab","ac","bc"可以压缩为如 <font color=#DC143C>*Figure 1*</font>
 2.按每个单词的路径遍历  
 直觉上来说第二个方法容易一些，事实上也确实是这样。如果按照1方法来做的话，需要一个记录层级的外部辅助变量，还需要在每一个node下记录这个node下面应该有哪些单词，实现起来相对麻烦。所以这里采用方法2进行构建。  
 按方法2的思路，首先给出我们对于每个单词的构建方法：  
-```  
+```python  
+
 def build_trie(dic, word):  
     pass  
 ```  
 (为什么需要这两个参数后面会提到)  
 其中<font color=#DC143C>dic</font>代表当前的层级，<font color=#DC143C>word</font>代表当前构建中的单词然后遍历str_list调用构建方法build_trie()  
-```  
+```python  
+
 for word in str_list:  
     build_trie(root, word)  
 ```  
 接下来思考build_trie()的内部如何实现：  
 首先在实现这个方法的时候要明确，每一次调用build_trie()都只对一层进行操作。在这一层中，层数是等价于单词中char的索引的。所以我们的方法应该在每一层只对word中对应的char进行判断，若这个当前层没有char这个节点，则添加一个名叫"char"的节点，之后继续向下层递归，递归的对象  为当前层级的HashMap以及除去已操作过的char的word：  
-```  
+```python  
+
 if word[0] not in dic:  
     dic[word[0]] = {}  
     build_trie(dic[word[0]], word[1:]  
 ```  
 否则跳过生成直接将对应节点作为新的递归对象：  
-```  
+```python  
+
 else:  
     build_trie(dic[word[0]], word[1:])  
 ```  
   
 下面给出完整代码作为参考：  
-```  
+```python  
+
 str_list = ['abc','abd','bcd',"ab"]  
 root = {}  
   
@@ -71,7 +76,8 @@ for word in str_list:
 print(root)  
 ```  
 得到如下结果：  
-```  
+```python  
+
 {  
     'a': {  
         'b': {  
@@ -111,12 +117,14 @@ print(root)
   
 下面考虑实现方式：  
 首先我们需要一个p3作为开始位置的索引：  
-```  
+```python  
+
 for p3 in range(len(s)):  
     pass  
 ```  
 然后我们要在这个循环中进行p2和p1的匹配，则设一个函数：  
-```  
+```python  
+
 def compare(p2, p1):  
     pass  
 ```  
@@ -125,7 +133,8 @@ def compare(p2, p1):
 2.p2的元素不在p1中，这个时候如果没有字串目标的话就应该返回False了，但是因为目标之间存在包含关系，则需要按照 <font color=#DC143C>*Figure 4*</font>的逻辑判断当前的截断是否为目标串，根据情况返回True或False  
   
 下面给出完整代码供参考：  
-```  
+```python  
+
 s = "ababcde"  
 res = []  
   
