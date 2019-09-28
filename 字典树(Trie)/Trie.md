@@ -109,7 +109,7 @@ print(root)
 ![*Figure 2*](http://shiroumi.com/static/wtf_site_app/static_sources/essay_img/2.png)  
 比较的时候我们需要一个指针p1指向树结构的节点，另外一个指针p2指向当前遍历到的序列节点，但只有这两个指针只能找到单词在序列中的结束位置，所以还需要另外一个指针p3指向当前子序列的开始位置，这样<font color=#DC143C>p2到p3之间的序列</font>就是我们的匹配内容。  
 ![*Figure 3*](http://shiroumi.com/static/wtf_site_app/static_sources/essay_img/3.png)  
-特别值得一提的是，若遇到包含关系的时候，需要先确定短序列不是目标词，再判断长序列 。若短序列为目标词，则直接返回True。  
+特别值得一提的是，若遇到连续两个子序列为包含关系的时候(如ababc)，需要先确定短序列是不是目标词，再判断长序列 。若短序列为目标词，则直接返回True。  
 ![*Figure 4*](http://shiroumi.com/static/wtf_site_app/static_sources/essay_img/4.png)  
 现在思考 <font color=#DC143C>*Figure 4*</font> 的情况，p2指向的字符不在p1中，但之前的"a"，"b"都已经完成了匹配，也就是说在p2之前的序列全部匹配成功。  
 在这种情况下，只需要判断p1中是否存在我们之前生成的结尾标记True。若存在则将匹配成功标记返回，则子序列"ab"完成匹配。  
