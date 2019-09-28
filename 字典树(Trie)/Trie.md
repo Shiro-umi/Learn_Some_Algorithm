@@ -4,20 +4,20 @@
   
 # 1.什么是字典树(Trie)    
 字典树是一种树结构，又称单词查找树，其特点是通过共享单词的前缀节点来实现压缩存储空间的目的。    
-eg. 单词"ab","ac","bc"可以压缩为如 $\color{blue}{*Figure 1*}$ 表示的结构：    
+eg. 单词"ab","ac","bc"可以压缩为如 <font color=red>*Figure 1*</font> 表示的结构：    
   
 ![*Figure 1*](http://shiroumi.com/static/wtf_site_app/static_sources/essay_img/1.jpg)  
   
 对于上面树结构进行解释：  
     1.树的跟节点为root(空)  
-    2.从root出发，root的所有child表示所有$\color{red}{存在于字典中的}$单词的$\color{red}{第一个字母}$  
+    2.从root出发，root的所有child表示所有<font color=red>存在于字典中的</font>单词的<font color=red>第一个字母</font>
     3.逐级向下查找最终找到或找不到目标单词  
     4.若目标单词中存在包含关系如：''ab'',''a''，其中''a''也为目标单词，但被目标单词"ab"包含这种情况下应对''a''节点做一个标记，若目标单词在树中遍历到''a''节点停止，则匹配成功  
   
 # 2.构建字典树  
 对于字典树的构建，一般情况下采用HashMap作为载体  
 使用HashMap的原因在于HashMap可以在O(1)时间内定位到下一个节点  
-        ~~# 毕竟这玩意在python里面就叫字典~~  
+        **~~毕竟这玩意在python里面就叫字典~~**
 首先给出关键词的列表定义：  
 `str_list = ['abc','abd','bcd','ab']`  
 既然决定了要使用HashMap构建字典树，在开始之前我们现需要生成一个root节点：  
@@ -32,7 +32,7 @@ def build_trie(dic, word):
     pass  
 ```  
 (为什么需要这两个参数后面会提到)  
-其中$\color{red}{dic}$代表当前的层级，$\color{red}{word}$代表当前构建中的单词然后遍历str_list调用构建方法build_trie()  
+其中<font color=red>dic</font>代表当前的层级，<font color=red>word</font>代表当前构建中的单词然后遍历str_list调用构建方法build_trie()  
 ```  
 for word in str_list:  
     build_trie(root, word)  
@@ -105,7 +105,7 @@ print(root)
 ![*Figure 3*](http://shiroumi.com/static/wtf_site_app/static_sources/essay_img/3.png)  
 特别值得一提的是，若遇到包含关系的时候，需要先确定短序列不是目标词，再判断长序列 。若短序列为目标词，则直接返回True。  
 ![*Figure 4*](http://shiroumi.com/static/wtf_site_app/static_sources/essay_img/4.png)  
-现在思考 $\color{blue}{*Figure 4*}$ 的情况，p2指向的字符不在p1中，但之前的"a"，"b"都已经完成了匹配，也就是说在p2之前的序列全部匹配成功。  
+现在思考 <font color=red>*Figure 4*</font> 的情况，p2指向的字符不在p1中，但之前的"a"，"b"都已经完成了匹配，也就是说在p2之前的序列全部匹配成功。  
 在这种情况下，只需要判断p1中是否存在我们之前生成的结尾标记True。若存在则将匹配成功标记返回，则子序列"ab"完成匹配。  
 若p2指向的字符在p1中存在，按正常的匹配逻辑则会自动忽略短序列。  
   
