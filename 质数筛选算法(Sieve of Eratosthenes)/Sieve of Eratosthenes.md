@@ -24,7 +24,7 @@ for i in range(2,100):
     if isPrime(i):
         count += 1
 
-print(count)
+print(count)  
 ```  
 从形式上看这个解法确实严格遵循上面所提到的思路，但是直觉告诉我里面一定有什么不对的地方。  
 回想一下小学时学的乘法口诀：  
