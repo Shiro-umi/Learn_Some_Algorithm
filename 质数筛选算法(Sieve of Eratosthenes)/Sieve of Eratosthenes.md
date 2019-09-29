@@ -87,10 +87,11 @@ isPrime = [True for i in range(n)]      # 初始化计数列表
 
 p1 = 2
 while p1**2 < n:
-    p2 = p1
-    while p2*p1 < n:
-        isPrime[p2*p1] = False
-        p2 += 1
+    if isPrime[p1]:
+        p2 = p1
+        while p2*p1 < n:
+            isPrime[p2*p1] = False
+            p2 += 1
     p1 += 1
 
 print(isPrime.count(True)-2)
